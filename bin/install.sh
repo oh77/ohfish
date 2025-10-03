@@ -81,9 +81,13 @@ if command -v fish &> /dev/null; then
     echo "✓ Fish shell is installed"
     
     # Install fisher if not present
-    if ! fish -c "type -q fisher" &> /dev/null; then
+    FISH_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/fish"
+    FISHER_FILE="$FISH_CONFIG_DIR/functions/fisher.fish"
+    
+    if [ ! -f "$FISHER_FILE" ]; then
         echo "⟳ Installing fisher plugin manager..."
-        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+        mkdir -p "$FISH_CONFIG_DIR/functions"
+        curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish -o "$FISHER_FILE"
         echo "✓ Fisher installed"
     else
         echo "✓ Fisher is already installed"
