@@ -29,5 +29,13 @@ else
     echo "✓ Homebrew installed"
 fi
 
+# Install packages from Brewfile
+echo "⟳ Installing packages from Brewfile..."
+BREWFILE_URL="https://raw.githubusercontent.com/oh77/ohfish/main/Brewfile"
+curl -fsSL "$BREWFILE_URL" -o /tmp/Brewfile
+brew bundle --file=/tmp/Brewfile
+rm /tmp/Brewfile
+echo "✓ Packages installed"
+
 echo "✅ Mac setup complete!"
 
