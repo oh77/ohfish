@@ -10,10 +10,20 @@ tap "isen-ng/dotnet-sdk-versions"
 tap "oven-sh/bun"
 
 # Formulae
+brew "eza"
 brew "fish"
+brew "gh"
 brew "git"
+brew "nvm"
 
 # Casks
-# Meta-packages for .NET SDKs; install multiple versions as needed
+cask "beyond-compare"
 cask "dotnet-sdk8"
 cask "dotnet-sdk9"
+cask "firefox"
+cask "google-chrome"
+cask "jetbrains-toolbox"
+cask "notunes"
+cask "postman"
+cask "raycast"
+cask "visual-studio-code"
