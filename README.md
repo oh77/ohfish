@@ -14,6 +14,7 @@ curl -fsSL https://raw.githubusercontent.com/oh77/ohfish/main/bin/install.sh | b
 
 - ✓ Installs Homebrew (if not present)
 - ✓ Updates Homebrew (if needed)
-- ✓ Skips update if already up to date
 - ✓ Installs packages from Brewfile
+- ✓ Installs Fish shell and Fisher plugin manager
+- ✓ Installs Fisher plugins from fish_plugins file
 

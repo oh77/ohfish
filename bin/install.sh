@@ -76,5 +76,36 @@ else
     echo "⚠ Brewfile not found, skipping package installation"
 fi
 
+# Setup Fish shell and fisher plugins
+if command -v fish &> /dev/null; then
+    echo "✓ Fish shell is installed"
+    
+    # Install fisher if not present
+    if ! fish -c "type -q fisher" &> /dev/null; then
+        echo "⟳ Installing fisher plugin manager..."
+        fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher"
+        echo "✓ Fisher installed"
+    else
+        echo "✓ Fisher is already installed"
+    fi
+    
+    # Install fisher plugins
+    if [ -f "$SCRIPT_DIR/fish_plugins" ]; then
+        echo "⟳ Installing fisher plugins..."
+        while IFS= read -r plugin; do
+            # Skip empty lines and comments
+            [[ -z "$plugin" || "$plugin" =~ ^# ]] && continue
+            
+            # Skip fisher itself as it's already installed
+            [[ "$plugin" == "jorgebucaran/fisher" ]] && continue
+            
+            fish -c "fisher install $plugin" || echo "⚠ Failed to install $plugin"
+        done < "$SCRIPT_DIR/fish_plugins"
+        echo "✓ Fisher plugins installed"
+    fi
+else
+    echo "⚠ Fish shell not found, skipping fisher setup"
+fi
+
 echo "✅ Mac setup complete!"
 
